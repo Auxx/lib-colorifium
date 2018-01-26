@@ -3,7 +3,7 @@
  */
 export class Matrix {
   /**
-   * sRGB to XYZ conversion matrix
+   * sRGB to XYZ conversion matrix.
    * @type {{r: number[]; g: number[]; b: number[]}}
    */
   static readonly sRGBtoXYZ = {
@@ -13,7 +13,7 @@ export class Matrix {
   };
 
   /**
-   * XYZ to sRGB conversion matrix
+   * XYZ to sRGB conversion matrix.
    * @type {{x: number[]; y: number[]; z: number[]}}
    */
   static readonly XYZtosRGB = {

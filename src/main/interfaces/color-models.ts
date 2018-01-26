@@ -1,5 +1,5 @@
 /**
- * 8 bit RGB (0-255 values)
+ * 8 bit RGB (0-255 values).
  */
 export interface RGB8 {
   r: number;
@@ -8,7 +8,7 @@ export interface RGB8 {
 }
 
 /**
- * RGB representation in float numbers (0.0-1.0 values)
+ * RGB representation in float numbers (0.0-1.0 values).
  */
 export interface RGBF {
   r: number;
@@ -19,7 +19,7 @@ export interface RGBF {
 /**
  * HSL colour model representation.
  * H component is represented by degrees (0-360).
- * S and L components are represented by a float number (0.0-1.0)
+ * S and L components are represented by a float number (0.0-1.0).
  */
 export interface HSL {
   h: number;
@@ -30,7 +30,7 @@ export interface HSL {
 /**
  * HSV colour model representation.
  * H component is represented by degrees (0-360).
- * S and V components are represented by a float number (0.0-1.0)
+ * S and V components are represented by a float number (0.0-1.0).
  */
 export interface HSV {
   h: number;

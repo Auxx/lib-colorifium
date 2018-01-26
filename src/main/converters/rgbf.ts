@@ -5,13 +5,13 @@ import { RGB8, RGBF } from '../interfaces/color-models';
  */
 export class FromRGBF {
   /**
-   * Converts RGBF object to RGB8
+   * Converts RGBF object to RGB8.
    * @param {RGBF} rgb
    * @returns {RGB8}
    */
   static toRGB8(rgb: RGBF): RGB8;
   /**
-   * Converts RGBF values to RGB8
+   * Converts RGBF values to RGB8.
    * @param {number} r
    * @param {number} g
    * @param {number} b
