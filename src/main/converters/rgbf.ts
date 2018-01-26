@@ -19,19 +19,27 @@ export class FromRGBF {
    */
   static toRGB8(r: number, g: number, b: number): RGB8;
   static toRGB8(r: any, g?: number, b?: number): RGB8 {
+    const args = FromRGBF.resolveArguments(r, g, b);
+
+    return {
+      r: Math.round(args.r * 255),
+      g: Math.round(args.g * 255),
+      b: Math.round(args.b * 255)
+    };
+  }
+
+  private static resolveArguments(r: any, g?: number, b?: number): RGBF {
     const argumentType = typeof r;
-    let result: RGB8;
+    let result: RGBF;
 
     if (argumentType === 'object' && r !== null) {
       result = { r: r.r, g: r.g, b: r.b };
     } else if (argumentType === 'number') {
       result = { r: r, g: g, b: b };
+    } else {
+      throw new TypeError('Unknown arguments passed');
     }
 
-    return {
-      r: Math.round(result.r * 255),
-      g: Math.round(result.g * 255),
-      b: Math.round(result.b * 255)
-    };
+    return result;
   }
 }
