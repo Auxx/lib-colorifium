@@ -1,4 +1,5 @@
-import { RGB8, RGBF } from '../interfaces/color-models';
+import { HSL, RGB8, RGBF } from '../interfaces/color-models';
+import { FromRGBF } from './rgbf';
 
 /**
  * Converter from 8 bit RGB colour model representation into other supported colour models.
@@ -27,6 +28,24 @@ export class FromRGB8 {
       g: args.g / 255,
       b: args.b / 255
     };
+  }
+
+  /**
+   * Converts RGB8 object to HSL.
+   * @param {RGB8} rgb
+   * @returns {HSL}
+   */
+  static toHSL(rgb: RGB8): HSL;
+  /**
+   * Converts RGB 8 bit values to HSL.
+   * @param {number} r
+   * @param {number} g
+   * @param {number} b
+   * @returns {HSL}
+   */
+  static toHSL(r: number, g: number, b: number): HSL;
+  static toHSL(r: any, g?: number, b?: number): HSL {
+    return FromRGBF.toHSL(FromRGB8.toRGBF(r, g, b));
   }
 
   private static resolveArguments(r: any, g?: number, b?: number): RGB8 {

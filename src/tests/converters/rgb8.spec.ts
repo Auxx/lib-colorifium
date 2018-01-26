@@ -15,4 +15,11 @@ describe('FromRGB8', () => {
     expect(result.g).to.be.within(0.36078, 0.36079);
     expect(result.b).to.be.within(0.95686, 0.95687);
   });
+
+  it('should convert from RGB8 to HSL', () => {
+    const result = FromRGB8.toHSL(64, 133, 211);
+    expect(result.h).to.be.within(211.8, 211.9);
+    expect(result.s).to.be.within(0.62, 0.63);
+    expect(result.l).to.be.within(0.53, 0.54);
+  });
 });
