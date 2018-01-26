@@ -2,6 +2,7 @@ import { RGB8, RGBF } from '../interfaces/color-models';
 
 /**
  * Converter from 8 bit RGB colour model representation into other supported colour models.
+ * sRGB colour space with D65 white point is assumed.
  */
 export class FromRGB8 {
   /**
