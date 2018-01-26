@@ -1,7 +1,9 @@
-import { RGB8, RGBF } from '../interfaces/color-models';
+import { HSL, RGB8, RGBF } from '../interfaces/color-models';
+import { HueHelper } from '../util/helpers';
 
 /**
  * Converter from float number RGB colour model representation into other supported colour models.
+ * sRGB colour space with D65 white point is assumed.
  */
 export class FromRGBF {
   /**
@@ -25,6 +27,40 @@ export class FromRGBF {
       r: Math.round(args.r * 255),
       g: Math.round(args.g * 255),
       b: Math.round(args.b * 255)
+    };
+  }
+
+  /**
+   * Converts RGBF object to HSL.
+   * @param {RGBF} rgb
+   * @returns {HSL}
+   */
+  static toHSL(rgb: RGBF): HSL;
+  /**
+   * Converts RGBF values to HSL.
+   * @param {number} r
+   * @param {number} g
+   * @param {number} b
+   * @returns {HSL}
+   */
+  static toHSL(r: number, g: number, b: number): HSL;
+  static toHSL(r: any, g?: number, b?: number): HSL {
+    const args = FromRGBF.resolveArguments(r, g, b);
+    const basis = HueHelper.calculateBasisFromRGBF(args);
+
+    const l = (basis.max + basis.min) / 2;
+    let s;
+
+    if (basis.delta === 0) {
+      s = 0;
+    } else {
+      s = l < 0.5 ? basis.delta / (basis.max + basis.min) : basis.delta / (2 - basis.max - basis.min);
+    }
+
+    return {
+      h: basis.hue,
+      s: s,
+      l: l
     };
   }
 
