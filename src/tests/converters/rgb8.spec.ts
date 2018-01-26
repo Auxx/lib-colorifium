@@ -1,5 +1,6 @@
 import { expect } from 'chai';
 import 'mocha';
+
 import { FromRGB8 } from '../../main/converters/rgb8';
 
 describe('FromRGB8', () => {
