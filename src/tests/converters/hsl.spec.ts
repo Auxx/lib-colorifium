@@ -1,5 +1,6 @@
 import { expect } from 'chai';
 import 'mocha';
+
 import { FromHSL } from '../../main/converters/hsl';
 
 describe('FromHSL', () => {
