@@ -16,7 +16,7 @@ describe('FromHSL', () => {
     expect(result.b).to.be.within(0.910, 0.911);
   });
 
-  it('should convert from HSL to RGBF', () => {
+  it('should convert from HSL to RGB8', () => {
     const result = FromHSL.toRGB8(22.5, 1, 0.6);
     expect(result.r).to.eq(255);
     expect(result.g).to.eq(128);
