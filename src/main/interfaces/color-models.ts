@@ -18,7 +18,7 @@ export interface RGBF {
 
 /**
  * HSL colour model representation.
- * H component is represented by degrees (0-360).
+ * H component is represented by degrees (0.0-360.0).
  * S and L components are represented by a float number (0.0-1.0).
  */
 export interface HSL {
@@ -29,7 +29,7 @@ export interface HSL {
 
 /**
  * HSV colour model representation.
- * H component is represented by degrees (0-360).
+ * H component is represented by degrees (0.0-360.0).
  * S and V components are represented by a float number (0.0-1.0).
  */
 export interface HSV {
@@ -41,7 +41,6 @@ export interface HSV {
 /**
  * XYZ colour model representation.
  * All values are float numbers.
- * I have no idea what are their boundaries.
  */
 export interface XYZ {
   x: number;
