@@ -51,6 +51,10 @@ export class XYZHelper {
   static pivotRGB(v: number): number {
     return (v > 0.04045 ? Math.pow((v + 0.055) / 1.055, 2.4) : v / 12.92);
   }
+
+  static pivotXYZ(v: number): number {
+    return (v > 0.0031308 ? 1.055 * Math.pow(v, 1 / 2.4) - 0.055 : 12.92 * v);
+  }
 }
 
 export interface HueBasis {
