@@ -46,4 +46,11 @@ describe('FromRGBF', () => {
     expect(result.s).to.eq(0.8);
     expect(result.v).to.eq(1);
   });
+
+  it('should convert from RGBF to XYZ', () => {
+    const result = FromRGBF.toXYZ(1, 0.5, 0.2);
+    expect(result.x).to.be.within(49.496, 49.497);
+    expect(result.y).to.be.within(36.813, 36.814);
+    expect(result.z).to.be.within(7.6305, 7.6306);
+  });
 });

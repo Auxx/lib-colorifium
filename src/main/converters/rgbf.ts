@@ -1,5 +1,6 @@
-import { HSL, HSV, RGB8, RGBF } from '../interfaces/color-models';
-import { HueHelper } from '../util/helpers';
+import { HSL, HSV, RGB8, RGBF, XYZ } from '../interfaces/color-models';
+import { HueHelper, XYZHelper } from '../util/helpers';
+import { Matrix } from '../util/matrix';
 
 /**
  * Converter from float number RGB colour model representation into other supported colour models.
@@ -86,6 +87,34 @@ export class FromRGBF {
       h: basis.hue,
       s: basis.max === 0 ? 0 : basis.delta / basis.max,
       v: basis.max
+    };
+  }
+
+  /**
+   * Converts RGBF object to XYZ.
+   * @param {RGBF} rgb
+   * @returns {XYZ}
+   */
+  static toXYZ(rgb: RGBF): XYZ;
+  /**
+   * Converts RGBF values to XYZ.
+   * @param {number} r
+   * @param {number} g
+   * @param {number} b
+   * @returns {XYZ}
+   */
+  static toXYZ(r: number, g: number, b: number): XYZ;
+  static toXYZ(r: any, g?: number, b?: number): XYZ {
+    const args = FromRGBF.resolveArguments(r, g, b);
+
+    const pr = XYZHelper.pivotRGB(args.r);
+    const pg = XYZHelper.pivotRGB(args.g);
+    const pb = XYZHelper.pivotRGB(args.b);
+
+    return {
+      x: pr * Matrix.sRGBtoXYZ.r[0] + pg * Matrix.sRGBtoXYZ.r[1] + pb * Matrix.sRGBtoXYZ.r[2],
+      y: pr * Matrix.sRGBtoXYZ.g[0] + pg * Matrix.sRGBtoXYZ.g[1] + pb * Matrix.sRGBtoXYZ.g[2],
+      z: pr * Matrix.sRGBtoXYZ.b[0] + pg * Matrix.sRGBtoXYZ.b[1] + pb * Matrix.sRGBtoXYZ.b[2]
     };
   }
 
