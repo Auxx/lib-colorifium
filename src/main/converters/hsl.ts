@@ -2,6 +2,10 @@ import { HSL, RGB8, RGBF } from '../interfaces/color-models';
 import { HueHelper } from '../util/helpers';
 import { FromRGBF } from './rgbf';
 
+/**
+ * Converts HSL colours for either RGB 8 bit or RGB float.
+ * HSL colour space is known as HSB in Photoshop.
+ */
 export class FromHSL {
   /**
    * Converts HSL object to RGBF.

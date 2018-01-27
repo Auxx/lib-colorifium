@@ -2,6 +2,11 @@ import { HSV, RGB8, RGBF } from '../interfaces/color-models';
 import { HueHelper } from '../util/helpers';
 import { FromRGBF } from './rgbf';
 
+/**
+ * Converts HSL colours for either RGB 8 bit or RGB float.
+ * HSV is an alternative version of HSL. Hue component is the same,
+ * but S and V are calculated a bit differently from S and L in HSL.
+ */
 export class FromHSV {
   /**
    * Converts HSV object to RGBF.
