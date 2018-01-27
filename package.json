@@ -1,7 +1,7 @@
 {
   "name": "lib-colorifium",
   "version": "0.1.0",
-  "author": "Aleksandr 'Aux' Ivanov",
+  "author": "Aleksandr 'Aux' Ivanov <aux@hexmode.org> (http://hexmode.org/)",
   "scripts": {
     "test": "mocha -r ts-node/register src/tests/**/*.spec.ts",
     "build": "tsc",
