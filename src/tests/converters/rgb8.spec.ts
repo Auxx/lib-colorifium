@@ -22,4 +22,11 @@ describe('FromRGB8', () => {
     expect(result.s).to.be.within(0.62, 0.63);
     expect(result.l).to.be.within(0.53, 0.54);
   });
+
+  it('should convert from RGB8 to HSV', () => {
+    const result = FromRGB8.toHSV(255, 128, 51);
+    expect(result.h).to.be.within(22.64, 22.65);
+    expect(result.s).to.eq(0.8);
+    expect(result.v).to.eq(1);
+  });
 });
