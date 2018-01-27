@@ -78,7 +78,7 @@ gulp.task('release:bump', () => {
  */
 gulp.task('release:bumpPatch', () => {
   return gulp.src('./package/package.json')
-    .pipe(bump({ type: 'minor' }))
+    .pipe(bump({ type: 'patch' }))
     .pipe(gulp.dest('./package/'));
 });
 
