@@ -2,6 +2,41 @@ const gulp = require('gulp');
 const bump = require('gulp-bump');
 const git = require('gulp-git');
 const runSequence = require('run-sequence');
+const run = require('gulp-run');
+const del = require('del');
+const ts = require("gulp-typescript");
+
+gulp.task('package:clean', () => {
+  del.sync('./dist/**/*');
+});
+
+gulp.task('package:build', () => {
+  const project = ts.createProject('tsconfig.json');
+  return project
+    .src()
+    .pipe(project())
+    .js.pipe(gulp.dest(('./dist/out')));
+});
+
+gulp.task('package:buildDefs', () => {
+  const project = ts.createProject('tsconfig.json');
+  return project
+    .src()
+    .pipe(project())
+    .dts.pipe(gulp.dest('./dist/out'));
+});
+
+gulp.task('package:prepare', () => {
+  return gulp
+    .src('./dist/out/main/**/*')
+    .pipe(gulp.dest('./dist/package'));
+});
+
+gulp.task('package:overlay', () => {
+  return gulp
+    .src('./package/**')
+    .pipe(gulp.dest('./dist/package'));
+});
 
 /*
  * Version bumping
@@ -11,27 +46,27 @@ const runSequence = require('run-sequence');
  * Bumps major version number
  */
 gulp.task('release:bumpMajor', () => {
-  return gulp.src('./package.json')
+  return gulp.src('./package/package.json')
     .pipe(bump({ type: 'major' }))
-    .pipe(gulp.dest('./'));
+    .pipe(gulp.dest('./package/'));
 });
 
 /**
  * Bumps minor version number, this is a default action
  */
 gulp.task('release:bump', () => {
-  return gulp.src('./package.json')
+  return gulp.src('./package/package.json')
     .pipe(bump({ type: 'minor' }))
-    .pipe(gulp.dest('./'));
+    .pipe(gulp.dest('./package/'));
 });
 
 /**
  * Bumps patch version number
  */
 gulp.task('release:bumpPatch', () => {
-  return gulp.src('./package.json')
+  return gulp.src('./package/package.json')
     .pipe(bump({ type: 'minor' }))
-    .pipe(gulp.dest('./'));
+    .pipe(gulp.dest('./package/'));
 });
 
 /*
@@ -39,9 +74,9 @@ gulp.task('release:bumpPatch', () => {
  */
 
 gulp.task('release:tag', () => {
-  const version = require(__dirname + '/package.json').version;
+  const version = require(__dirname + '/package/package.json').version;
 
-  return gulp.src('./package.json')
+  return gulp.src('./package/package.json')
     .pipe(git.add())
     .pipe(git.commit(`Preparing new release ${version}`))
     .pipe(git.tag(version), `Version ${version}`)
