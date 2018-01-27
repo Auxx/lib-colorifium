@@ -5,6 +5,17 @@ const runSequence = require('run-sequence');
 const run = require('gulp-run');
 const del = require('del');
 const ts = require("gulp-typescript");
+const spawn = require('child_process').spawn;
+
+/*
+ * Library publishing
+ */
+
+gulp.task('publish', done => spawn('npm', ['publish'], { cwd: 'dist/package', stdio: 'inherit' }).on('close', done));
+
+/*
+ * Library building and packaging
+ */
 
 gulp.task('package:clean', () => {
   del.sync('./dist/**/*');
@@ -34,7 +45,7 @@ gulp.task('package:prepare', () => {
 
 gulp.task('package:overlay', () => {
   return gulp
-    .src('./package/**')
+    .src(['./package/**', './README.md', './LICENCE'])
     .pipe(gulp.dest('./dist/package'));
 });
 
@@ -44,7 +55,7 @@ gulp.task('package', done => runSequence('package:clean', ['package:build', 'pac
  * Version bumping
  */
 
-/**
+/*
  * Bumps major version number
  */
 gulp.task('release:bumpMajor', () => {
@@ -53,7 +64,7 @@ gulp.task('release:bumpMajor', () => {
     .pipe(gulp.dest('./package/'));
 });
 
-/**
+/*
  * Bumps minor version number, this is a default action
  */
 gulp.task('release:bump', () => {
@@ -62,7 +73,7 @@ gulp.task('release:bump', () => {
     .pipe(gulp.dest('./package/'));
 });
 
-/**
+/*
  * Bumps patch version number
  */
 gulp.task('release:bumpPatch', () => {
@@ -96,18 +107,18 @@ gulp.task('release:push', done => {
  * Release aggregations
  */
 
-/**
+/*
  * Creates a new release with minor version number bump.
  * This is a default release action.
  */
 gulp.task('release', done => runSequence('release:switchToMaster', 'release:bump', 'release:tag', 'release:push', done));
 
-/**
+/*
  * Creates a new release with major version number bump.
  */
 gulp.task('releaseMajor', done => runSequence('release:switchToMaster', 'release:bumpMajor', 'release:tag', 'release:push', done));
 
-/**
+/*
  * Creates a new release with patch version number bump.
  */
 gulp.task('releasePatch', done => runSequence('release:switchToMaster', 'release:bumpPatch', 'release:tag', 'release:push', done));
