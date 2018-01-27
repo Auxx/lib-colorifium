@@ -23,16 +23,16 @@ gulp.task('package:clean', () => {
 
 gulp.task('package:build', () => {
   const project = ts.createProject('tsconfig.json');
-  return project
-    .src()
+  return gulp
+    .src('./src/**/*.ts')
     .pipe(project())
     .js.pipe(gulp.dest(('./dist/out')));
 });
 
 gulp.task('package:buildDefs', () => {
   const project = ts.createProject('tsconfig.json');
-  return project
-    .src()
+  return gulp
+    .src('./src/**/*.ts')
     .pipe(project())
     .dts.pipe(gulp.dest('./dist/out'));
 });
