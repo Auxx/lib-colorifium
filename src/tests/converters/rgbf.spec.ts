@@ -49,8 +49,8 @@ describe('FromRGBF', () => {
 
   it('should convert from RGBF to XYZ', () => {
     const result = FromRGBF.toXYZ(1, 0.5, 0.2);
-    expect(result.x).to.be.within(49.496, 49.497);
-    expect(result.y).to.be.within(36.813, 36.814);
-    expect(result.z).to.be.within(7.6305, 7.6306);
+    expect(result.x).to.be.within(0.49496, 0.49497);
+    expect(result.y).to.be.within(0.36813, 0.36814);
+    expect(result.z).to.be.within(0.076305, 0.076306);
   });
 });

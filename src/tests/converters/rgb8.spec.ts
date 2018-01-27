@@ -37,8 +37,8 @@ describe('FromRGB8', () => {
 
   it('should convert from RGB8 to XYZ', () => {
     const result = FromRGB8.toXYZ(255, 128, 51);
-    expect(result.x).to.be.within(49.561, 49.562);
-    expect(result.y).to.be.within(36.943, 36.944);
-    expect(result.z).to.be.within(7.6522, 7.6523);
+    expect(result.x).to.be.within(0.49561, 0.49562);
+    expect(result.y).to.be.within(0.36943, 0.36944);
+    expect(result.z).to.be.within(0.076522, 0.076523);
   });
 });
