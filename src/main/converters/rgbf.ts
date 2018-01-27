@@ -1,4 +1,4 @@
-import { HSL, RGB8, RGBF } from '../interfaces/color-models';
+import { HSL, HSV, RGB8, RGBF } from '../interfaces/color-models';
 import { HueHelper } from '../util/helpers';
 
 /**
@@ -61,6 +61,31 @@ export class FromRGBF {
       h: basis.hue,
       s: s,
       l: l
+    };
+  }
+
+  /**
+   * Converts RGBF object to HSV.
+   * @param {RGBF} rgb
+   * @returns {HSV}
+   */
+  static toHSV(rgb: RGBF): HSV;
+  /**
+   * Converts RGBF values to HSV.
+   * @param {number} r
+   * @param {number} g
+   * @param {number} b
+   * @returns {HSV}
+   */
+  static toHSV(r: number, g: number, b: number): HSV;
+  static toHSV(r: any, g?: number, b?: number): HSV {
+    const args = FromRGBF.resolveArguments(r, g, b);
+    const basis = HueHelper.calculateBasisFromRGBF(args);
+
+    return {
+      h: basis.hue,
+      s: basis.max === 0 ? 0 : basis.delta / basis.max,
+      v: basis.max
     };
   }
 

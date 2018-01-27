@@ -39,4 +39,11 @@ describe('FromRGBF', () => {
     expect(result.s).to.be.within(0.77, 0.78);
     expect(result.l).to.be.within(0.54, 0.56);
   });
+
+  it('should convert from RGBF to HSV', () => {
+    const result = FromRGBF.toHSV(1, 0.5, 0.2);
+    expect(result.h).to.be.within(22.49, 22.5);
+    expect(result.s).to.eq(0.8);
+    expect(result.v).to.eq(1);
+  });
 });
