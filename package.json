@@ -4,6 +4,7 @@
   "author": "Aleksandr 'Aux' Ivanov",
   "scripts": {
     "test": "mocha -r ts-node/register src/tests/**/*.spec.ts",
+    "build": "tsc",
     "webpack": "webpack",
     "start": "webpack-dev-server"
   },
