@@ -32,6 +32,13 @@ export class HueHelper {
   }
 }
 
+export class HexHelper {
+  static numberToHex(value: number): string {
+    const result = value.toString(16).toUpperCase();
+    return result.length % 2 === 0 ? result : `0${result}`;
+  }
+}
+
 export interface HueBasis {
   min: number;
   max: number;

@@ -29,4 +29,9 @@ describe('FromRGB8', () => {
     expect(result.s).to.eq(0.8);
     expect(result.v).to.eq(1);
   });
+
+  it('should convert from RGB8 to hex', () => {
+    const result = FromRGB8.toHex(255, 80, 45);
+    expect(result).to.eq('FF502D');
+  });
 });

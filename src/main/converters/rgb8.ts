@@ -1,5 +1,6 @@
 import { HSL, HSV, RGB8, RGBF } from '../interfaces/color-models';
 import { FromRGBF } from './rgbf';
+import { HexHelper } from '../util/helpers';
 
 /**
  * Converter from 8 bit RGB colour model representation into other supported colour models.
@@ -64,6 +65,25 @@ export class FromRGB8 {
   static toHSV(r: number, g: number, b: number): HSV;
   static toHSV(r: any, g?: number, b?: number): HSV {
     return FromRGBF.toHSV(FromRGB8.toRGBF(r, g, b));
+  }
+
+  /**
+   * Converts RGB8 object to hexadecimal representation.
+   * @param {RGB8} rgb
+   * @returns {string}
+   */
+  static toHex(rgb: RGB8): string;
+  /**
+   * Converts RGB 8 bit values to hexadecimal representation
+   * @param {number} r
+   * @param {number} g
+   * @param {number} b
+   * @returns {string}
+   */
+  static toHex(r: number, g: number, b: number): string;
+  static toHex(r: any, g?: number, b?: number): string {
+    const args = FromRGB8.resolveArguments(r, g, b);
+    return `${HexHelper.numberToHex(args.r)}${HexHelper.numberToHex(args.g)}${HexHelper.numberToHex(args.b)}`;
   }
 
   private static resolveArguments(r: any, g?: number, b?: number): RGB8 {
