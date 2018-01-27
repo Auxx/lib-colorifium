@@ -1,5 +1,6 @@
-import { HSL, RGBF } from '../interfaces/color-models';
+import { HSL, RGB8, RGBF } from '../interfaces/color-models';
 import { HueHelper } from '../util/helpers';
+import { FromRGBF } from './rgbf';
 
 export class FromHSL {
   /**
@@ -44,6 +45,24 @@ export class FromHSL {
         return HueHelper.hueToRgbMatrix(C, 0, X, m);
       }
     }
+  }
+
+  /**
+   * Converts HSL object to RGB8.
+   * @param {HSL} hsl
+   * @returns {RGB8}
+   */
+  static toRGB8(hsl: HSL): RGB8;
+  /**
+   * Converts HSL values to RGB8.
+   * @param {number} h
+   * @param {number} s
+   * @param {number} l
+   * @returns {RGB8}
+   */
+  static toRGB8(h: number, s: number, l: number): RGB8;
+  static toRGB8(h: any, s?: number, l?: number): RGB8 {
+    return FromRGBF.toRGB8(FromHSL.toRGBF(h, s, l));
   }
 
   private static resolveArguments(h: any, s?: number, l?: number): HSL {
