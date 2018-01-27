@@ -2,6 +2,7 @@ import { expect } from 'chai';
 import 'mocha';
 
 import { FromRGB8 } from '../../main/converters/rgb8';
+import { FromRGBF } from '../../main/converters/rgbf';
 
 describe('FromRGB8', () => {
   it('should convert from RGB 8 bit values to RGBF', () => {
@@ -33,5 +34,12 @@ describe('FromRGB8', () => {
   it('should convert from RGB8 to hex', () => {
     const result = FromRGB8.toHex(255, 80, 45);
     expect(result).to.eq('FF502D');
+  });
+
+  it('should convert from RGB8 to XYZ', () => {
+    const result = FromRGB8.toXYZ(255, 128, 51);
+    expect(result.x).to.be.within(49.561, 49.562);
+    expect(result.y).to.be.within(36.943, 36.944);
+    expect(result.z).to.be.within(7.6522, 7.6523);
   });
 });

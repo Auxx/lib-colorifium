@@ -1,4 +1,4 @@
-import { HSL, HSV, RGB8, RGBF } from '../interfaces/color-models';
+import { HSL, HSV, RGB8, RGBF, XYZ } from '../interfaces/color-models';
 import { FromRGBF } from './rgbf';
 import { HexHelper } from '../util/helpers';
 
@@ -51,7 +51,7 @@ export class FromRGB8 {
 
   /**
    * Converts RGB8 object to HSV.
-   * @param {RGBF} rgb
+   * @param {RGB8} rgb
    * @returns {HSV}
    */
   static toHSV(rgb: RGB8): HSV;
@@ -65,6 +65,24 @@ export class FromRGB8 {
   static toHSV(r: number, g: number, b: number): HSV;
   static toHSV(r: any, g?: number, b?: number): HSV {
     return FromRGBF.toHSV(FromRGB8.toRGBF(r, g, b));
+  }
+
+  /**
+   * Converts RGB8 object to XYZ.
+   * @param {RGB8} rgb
+   * @returns {XYZ}
+   */
+  static toXYZ(rgb: RGB8): XYZ;
+  /**
+   * Converts RGB 8 bit values to XYZ.
+   * @param {number} r
+   * @param {number} g
+   * @param {number} b
+   * @returns {XYZ}
+   */
+  static toXYZ(r: number, g: number, b: number): XYZ;
+  static toXYZ(r: any, g?: number, b?: number): XYZ {
+    return FromRGBF.toXYZ(FromRGB8.toRGBF(r, g, b));
   }
 
   /**
