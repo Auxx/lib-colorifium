@@ -30,6 +30,14 @@ export class HueHelper {
       hue: hue * 60
     };
   }
+
+  static hueToRgbMatrix(a: number, b: number, c: number, m: number): RGBF {
+    return {
+      r: a + m,
+      g: b + m,
+      b: c + m
+    };
+  }
 }
 
 export class HexHelper {
@@ -38,6 +46,7 @@ export class HexHelper {
     return result.length % 2 === 0 ? result : `0${result}`;
   }
 }
+
 export class XYZHelper {
   static pivotRGB(v: number): number {
     return (v > 0.04045 ? Math.pow((v + 0.055) / 1.055, 2.4) : v / 12.92) * 100;
