@@ -38,6 +38,8 @@ gulp.task('package:overlay', () => {
     .pipe(gulp.dest('./dist/package'));
 });
 
+gulp.task('package', done => runSequence('package:clean', ['package:build', 'package:buildDefs'], 'package:prepare', 'package:overlay', done));
+
 /*
  * Version bumping
  */
@@ -78,7 +80,7 @@ gulp.task('release:tag', () => {
 
   return gulp.src('./package/package.json')
     .pipe(git.add())
-    .pipe(git.commit(`Preparing new release ${version}`))
+    .pipe(git.commit(`Version ${version}`))
     .pipe(git.tag(version), `Version ${version}`)
 });
 
