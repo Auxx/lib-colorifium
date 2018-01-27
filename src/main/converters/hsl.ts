@@ -2,7 +2,19 @@ import { HSL, RGBF } from '../interfaces/color-models';
 import { HueHelper } from '../util/helpers';
 
 export class FromHSL {
+  /**
+   * Converts HSL object to RGBF.
+   * @param {HSL} hsl
+   * @returns {RGBF}
+   */
   static toRGBF(hsl: HSL): RGBF;
+  /**
+   * Converts HSL values to RGBF.
+   * @param {number} h
+   * @param {number} s
+   * @param {number} l
+   * @returns {RGBF}
+   */
   static toRGBF(h: number, s: number, l: number): RGBF;
   static toRGBF(h: any, s?: number, l?: number): RGBF {
     const args = FromHSL.resolveArguments(h, s, l);
