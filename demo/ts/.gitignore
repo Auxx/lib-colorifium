@@ -1,0 +1,29 @@
+# compiled output
+/dist
+/tmp
+/out-tsc
+
+# dependencies
+/node_modules
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+.vscode/
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/*.log
+/typings
+
+# System Files
+.DS_Store
+Thumbs.db
+*.iml

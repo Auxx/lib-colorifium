@@ -1,0 +1,16 @@
+{
+  "name": "lib-colorifium-js-example",
+  "version": "0.0.0",
+  "author": "Aleksandr 'Aux' Ivanov <aux@hexmode.org> (http://hexmode.org/)",
+  "scripts": {
+    "webpack": "webpack",
+    "start": "webpack-dev-server"
+  },
+  "devDependencies": {
+    "clean-webpack-plugin": "^0.1.18",
+    "lib-colorifium": "^0.0.0",
+    "html-webpack-plugin": "^2.30.1",
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.11.1"
+  }
+}
