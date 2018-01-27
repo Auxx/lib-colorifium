@@ -1,7 +1,7 @@
 {
   "name": "lib-colorifium",
   "description": "Colour model conversion library",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "author": "Aleksandr 'Aux' Ivanov <aux@hexmode.org> (http://hexmode.org/)",
   "keywords": ["colour", "color", "conversion", "rgb", "hsl", "hsv", "xyz"],
   "homepage": "http://hexmode.org/",
