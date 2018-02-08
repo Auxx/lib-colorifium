@@ -86,6 +86,14 @@ export declare class FromRGBF {
 This class contains static methods to convert `RGB8` (8 bit RGB) colours into all other
 colour models. `FromRGBF` is used behind the scenes in most cases. `toHex()` method
 converts RGB colour to its hexadecimal representation.
+`toRGBAHex()` and `toARGBHex()`
+convert to hexadecimal representation with alpha component (0-255) placed as
+suffix (CSS notation) and prefix (Android notation) respectively.
+`toCssRgba()` and `toCssRgb()` will convert RGB colour to its CSS RGB notation
+with or without alpha component (0-255).
+
+Please note that alpha components should be specified in the same format as other
+colour components as 8 bit integer number with a range from 0 to 255! 
 
 ```javascript
 export declare class FromRGB8 {
@@ -103,6 +111,26 @@ export declare class FromRGB8 {
 
     static toHex(rgb: RGB8): string;
     static toHex(r: number, g: number, b: number): string;
+
+    static toRGBAHex(rgb: RGB8, alpha: number): string;
+    static toRGBAHex(r: number, g: number, b: number, a: number): string;
+
+    static toARGBHex(rgb: RGB8, alpha: number): string;
+    static toARGBHex(r: number, g: number, b: number, a: number): string;
+    
+    static toCssRgba(rgb: RGB8, alpha: number): string;
+    static toCssRgba(r: number, g: number, b: number, alpha: number): string;
+}
+```
+
+### `FromHex`
+
+This class contains static methods to convert hexadecimal RGB colour representation into `RGB8`.
+Both `RRGGBB` and `RGB` CSS style notations are supported.
+
+```javascript
+export declare class FromHex {
+    static toRGB8(hex: string): RGB8;
 }
 ```
 

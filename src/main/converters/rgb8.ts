@@ -92,7 +92,7 @@ export class FromRGB8 {
    */
   static toHex(rgb: RGB8): string;
   /**
-   * Converts RGB 8 bit values to hexadecimal representation
+   * Converts RGB 8 bit values to hexadecimal representation.
    * @param {number} r
    * @param {number} g
    * @param {number} b
@@ -102,6 +102,88 @@ export class FromRGB8 {
   static toHex(r: any, g?: number, b?: number): string {
     const args = FromRGB8.resolveArguments(r, g, b);
     return `${HexHelper.numberToHex(args.r)}${HexHelper.numberToHex(args.g)}${HexHelper.numberToHex(args.b)}`;
+  }
+
+  /**
+   * Converts RGB8 object to hexadecimal representation with alpha component as the suffix.
+   * @param {RGB8} rgb
+   * @param {number} alpha
+   * @returns {string}
+   */
+  static toRGBAHex(rgb: RGB8, alpha: number): string;
+  /**
+   * Converts RGB 8 bit values to hexadecimal representation with alpha component as the suffix.
+   * @param {number} r
+   * @param {number} g
+   * @param {number} b
+   * @param {number} a
+   * @returns {string}
+   */
+  static toRGBAHex(r: number, g: number, b: number, a: number): string;
+  static toRGBAHex(r: any, g: number, b?: number, a?: number): string {
+    const args = FromRGB8.resolveRGBAArguments(r, g, b, a);
+    return `${FromRGB8.toHex(args)}${HexHelper.numberToHex(args.a)}`;
+  }
+
+  /**
+   * Converts RGB8 object to hexadecimal representation with alpha component as the prefix.
+   * @param {RGB8} rgb
+   * @param {number} alpha
+   * @returns {string}
+   */
+  static toARGBHex(rgb: RGB8, alpha: number): string;
+  /**
+   * Converts RGB 8 bit values to hexadecimal representation with alpha component as the prefix.
+   * @param {number} r
+   * @param {number} g
+   * @param {number} b
+   * @param {number} a
+   * @returns {string}
+   */
+  static toARGBHex(r: number, g: number, b: number, a: number): string;
+  static toARGBHex(r: any, g: number, b?: number, a?: number): string {
+    const args = FromRGB8.resolveRGBAArguments(r, g, b, a);
+    return `${HexHelper.numberToHex(args.a)}${FromRGB8.toHex(args)}`;
+  }
+
+  /**
+   * Converts RGB8 object to CSS RGB notation.
+   * @param {RGB8} rgb
+   * @returns {string}
+   */
+  static toCssRgb(rgb: RGB8): string;
+  /**
+   * Converts RGB 8 bit values to CSS RGB notation.
+   * @param {number} r
+   * @param {number} g
+   * @param {number} b
+   * @returns {string}
+   */
+  static toCssRgb(r: number, g: number, b: number): string;
+  static toCssRgb(r: any, g?: number, b?: number): string {
+    const args = FromRGB8.resolveArguments(r, g, b);
+    return `rgb(${args.r}, ${args.g}, ${args.b})`;
+  }
+
+  /**
+   * Converts RGB8 object to CSS RGBA notation.
+   * @param {RGB8} rgb
+   * @param {number} alpha
+   * @returns {string}
+   */
+  static toCssRgba(rgb: RGB8, alpha: number): string;
+  /**
+   * Converts RGB 8 bit values to CSS RGBA notation.
+   * @param {number} r
+   * @param {number} g
+   * @param {number} b
+   * @param {number} alpha
+   * @returns {string}
+   */
+  static toCssRgba(r: number, g: number, b: number, alpha: number): string;
+  static toCssRgba(r: any, g: number, b?: number, a?: number): string {
+    const args = FromRGB8.resolveRGBAArguments(r, g, b, a);
+    return `rgba(${args.r}, ${args.g}, ${args.b}, ${(args.a / 255).toFixed(2)})`;
   }
 
   private static resolveArguments(r: any, g?: number, b?: number): RGB8 {
@@ -118,4 +200,24 @@ export class FromRGB8 {
 
     return result;
   }
+
+  private static resolveRGBAArguments(r: any, g: number, b?: number, a?: number): RGBA {
+    const aType = typeof r;
+    const bType = typeof g;
+    let result: RGBA;
+
+    if (aType === 'object' && r !== null && bType === 'number') {
+      result = { r: r.r, g: r.g, b: r.b, a: g };
+    } else if (aType === 'number') {
+      result = { r: r, g: g, b: b, a: a };
+    } else {
+      throw new TypeError('Unknown arguments passed');
+    }
+
+    return result;
+  }
+}
+
+interface RGBA extends RGB8 {
+  a: number;
 }

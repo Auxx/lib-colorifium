@@ -35,6 +35,38 @@ describe('FromRGB8', () => {
     expect(result).to.eq('FF502D');
   });
 
+  it('should convert from RGB8 to CSS RGB', () => {
+    const result = FromRGB8.toCssRgb(255, 80, 45);
+    expect(result).to.eq('rgb(255, 80, 45)');
+  });
+
+  it('should convert from RGB8 to CSS RGBA', () => {
+    const result = FromRGB8.toCssRgba(255, 80, 45, 128);
+    expect(result).to.eq('rgba(255, 80, 45, 0.50)');
+  });
+
+  it('should convert from RGB8 to RGBA hex', () => {
+    let result = FromRGB8.toRGBAHex(255, 80, 45, 255);
+    expect(result).to.eq('FF502DFF');
+
+    result = FromRGB8.toRGBAHex(255, 80, 45, 128);
+    expect(result).to.eq('FF502D80');
+
+    result = FromRGB8.toRGBAHex({ r: 255, g: 80, b: 45 }, 128);
+    expect(result).to.eq('FF502D80');
+  });
+
+  it('should convert from RGB8 to ARGB hex', () => {
+    let result = FromRGB8.toARGBHex(255, 80, 45, 255);
+    expect(result).to.eq('FFFF502D');
+
+    result = FromRGB8.toARGBHex(255, 80, 45, 128);
+    expect(result).to.eq('80FF502D');
+
+    result = FromRGB8.toARGBHex({ r: 255, g: 80, b: 45 }, 128);
+    expect(result).to.eq('80FF502D');
+  });
+
   it('should convert from RGB8 to XYZ', () => {
     const result = FromRGB8.toXYZ(255, 128, 51);
     expect(result.x).to.be.within(0.49561, 0.49562);
