@@ -4,7 +4,11 @@
 export class Matrix {
   /**
    * sRGB to XYZ conversion matrix.
-   * @type {{r: number[]; g: number[]; b: number[]}}
+   * @type {{
+   *   r: number[number, number, number];
+   *   g: number[number, number, number];
+   *   b: number[number, number, number]
+   * }}
    */
   static readonly sRGBtoXYZ = {
     r: [ 0.4124564, 0.3575761, 0.1804375 ],
@@ -14,7 +18,11 @@ export class Matrix {
 
   /**
    * XYZ to sRGB conversion matrix.
-   * @type {{x: number[]; y: number[]; z: number[]}}
+   * @type {{
+   *   r: number[number, number, number];
+   *   g: number[number, number, number];
+   *   b: number[number, number, number]
+   * }}
    */
   static readonly XYZtosRGB = {
     x: [ 3.2404542, -1.5371385, -0.4985314 ],
