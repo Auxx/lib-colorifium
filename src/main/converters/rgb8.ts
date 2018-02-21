@@ -188,33 +188,31 @@ export class FromRGB8 {
 
   private static resolveArguments(r: any, g?: number, b?: number): RGB8 {
     const argumentType = typeof r;
-    let result: RGBF;
 
     if (argumentType === 'object' && r !== null) {
-      result = { r: r.r, g: r.g, b: r.b };
-    } else if (argumentType === 'number') {
-      result = { r: r, g: g, b: b };
-    } else {
-      throw new TypeError('Unknown arguments passed');
+      return { r: r.r, g: r.g, b: r.b };
     }
 
-    return result;
+    if (argumentType === 'number') {
+      return { r: r, g: g, b: b };
+    }
+
+    throw new TypeError('Unknown arguments passed');
   }
 
   private static resolveRGBAArguments(r: any, g: number, b?: number, a?: number): RGBA {
     const aType = typeof r;
     const bType = typeof g;
-    let result: RGBA;
 
     if (aType === 'object' && r !== null && bType === 'number') {
-      result = { r: r.r, g: r.g, b: r.b, a: g };
-    } else if (aType === 'number') {
-      result = { r: r, g: g, b: b, a: a };
-    } else {
-      throw new TypeError('Unknown arguments passed');
+      return { r: r.r, g: r.g, b: r.b, a: g };
     }
 
-    return result;
+    if (aType === 'number') {
+      return { r: r, g: g, b: b, a: a };
+    }
+
+    throw new TypeError('Unknown arguments passed');
   }
 }
 
