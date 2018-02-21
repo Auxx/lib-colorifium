@@ -3,6 +3,7 @@
 Colour model conversion library.
 
 [![npm version](https://badge.fury.io/js/lib-colorifium.svg)](https://badge.fury.io/js/lib-colorifium)
+[![Build Status](https://travis-ci.org/Auxx/lib-colorifium.svg?branch=master)](https://travis-ci.org/Auxx/lib-colorifium)
 
 Currently supported colour models:
 
