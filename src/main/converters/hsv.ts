@@ -26,38 +26,34 @@ export class FromHSV {
     const args = FromHSV.resolveArguments(h, s, v);
 
     if (args.s === 0) {
-      return {
-        r: v,
-        g: v,
-        b: v
-      };
-    } else {
-      const C = args.v * args.s;
-      const X = C * (1 - Math.abs((args.h / 60) % 2 - 1));
-      const m = args.v - C;
-
-      if (args.h < 60) {
-        return HueHelper.hueToRgbMatrix(C, X, 0, m);
-      }
-
-      if (args.h < 120) {
-        return HueHelper.hueToRgbMatrix(X, C, 0, m);
-      }
-
-      if (args.h < 180) {
-        return HueHelper.hueToRgbMatrix(0, C, X, m);
-      }
-
-      if (args.h < 240) {
-        return HueHelper.hueToRgbMatrix(0, X, C, m);
-      }
-
-      if (args.h < 300) {
-        return HueHelper.hueToRgbMatrix(X, 0, C, m);
-      }
-
-      return HueHelper.hueToRgbMatrix(C, 0, X, m);
+      return { r: v, g: v, b: v };
     }
+ 
+    const C = args.v * args.s;
+    const X = C * (1 - Math.abs((args.h / 60) % 2 - 1));
+    const m = args.v - C;
+
+    if (args.h < 60) {
+      return HueHelper.hueToRgbMatrix(C, X, 0, m);
+    }
+
+    if (args.h < 120) {
+      return HueHelper.hueToRgbMatrix(X, C, 0, m);
+    }
+
+    if (args.h < 180) {
+      return HueHelper.hueToRgbMatrix(0, C, X, m);
+    }
+
+    if (args.h < 240) {
+      return HueHelper.hueToRgbMatrix(0, X, C, m);
+    }
+
+    if (args.h < 300) {
+      return HueHelper.hueToRgbMatrix(X, 0, C, m);
+    }
+
+    return HueHelper.hueToRgbMatrix(C, 0, X, m);
   }
 
   /**
