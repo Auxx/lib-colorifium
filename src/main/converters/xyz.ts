@@ -54,16 +54,15 @@ export class FromXYZ {
 
   private static resolveArguments(x: any, y?: number, z?: number): XYZ {
     const argumentType = typeof x;
-    let result: XYZ;
 
     if (argumentType === 'object' && x !== null) {
-      result = { x: x.x, y: x.y, z: x.z };
-    } else if (argumentType === 'number') {
-      result = { x: x, y: y, z: z };
-    } else {
-      throw new TypeError('Unknown arguments passed');
+      return { x: x.x, y: x.y, z: x.z };
     }
 
-    return result;
+    if (argumentType === 'number') {
+      return { x: x, y: y, z: z };
+    }
+
+    throw new TypeError('Unknown arguments passed');
   }
 }
