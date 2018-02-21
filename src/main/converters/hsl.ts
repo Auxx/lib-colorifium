@@ -37,17 +37,25 @@ export class FromHSL {
 
       if (args.h < 60) {
         return HueHelper.hueToRgbMatrix(C, X, 0, m);
-      } else if (args.h < 120) {
-        return HueHelper.hueToRgbMatrix(X, C, 0, m);
-      } else if (args.h < 180) {
-        return HueHelper.hueToRgbMatrix(0, C, X, m);
-      } else if (args.h < 240) {
-        return HueHelper.hueToRgbMatrix(0, X, C, m);
-      } else if (args.h < 300) {
-        return HueHelper.hueToRgbMatrix(X, 0, C, m);
-      } else {
-        return HueHelper.hueToRgbMatrix(C, 0, X, m);
       }
+
+      if (args.h < 120) {
+        return HueHelper.hueToRgbMatrix(X, C, 0, m);
+      }
+
+      if (args.h < 180) {
+        return HueHelper.hueToRgbMatrix(0, C, X, m);
+      }
+
+      if (args.h < 240) {
+        return HueHelper.hueToRgbMatrix(0, X, C, m);
+      }
+
+      if (args.h < 300) {
+        return HueHelper.hueToRgbMatrix(X, 0, C, m);
+      }
+
+      return HueHelper.hueToRgbMatrix(C, 0, X, m);
     }
   }
 
@@ -71,16 +79,15 @@ export class FromHSL {
 
   private static resolveArguments(h: any, s?: number, l?: number): HSL {
     const argumentType = typeof h;
-    let result: HSL;
 
     if (argumentType === 'object' && h !== null) {
-      result = { h: h.h, s: h.s, l: h.l };
-    } else if (argumentType === 'number') {
-      result = { h: h, s: s, l: l };
-    } else {
-      throw new TypeError('Unknown arguments passed');
+      return { h: h.h, s: h.s, l: h.l };
     }
 
-    return result;
+    if (argumentType === 'number') {
+      return { h: h, s: s, l: l };
+    }
+
+    throw new TypeError('Unknown arguments passed');
   }
 }
