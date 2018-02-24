@@ -120,16 +120,15 @@ export class FromRGBF {
 
   private static resolveArguments(r: any, g?: number, b?: number): RGBF {
     const argumentType = typeof r;
-    let result: RGBF;
 
     if (argumentType === 'object' && r !== null) {
-      result = { r: r.r, g: r.g, b: r.b };
-    } else if (argumentType === 'number') {
-      result = { r: r, g: g, b: b };
-    } else {
-      throw new TypeError('Unknown arguments passed');
+      return { r: r.r, g: r.g, b: r.b };
     }
 
-    return result;
+    if (argumentType === 'number') {
+      return { r: r, g: g, b: b };
+    }
+
+    throw new TypeError('Unknown arguments passed');
   }
 }
