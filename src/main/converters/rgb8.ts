@@ -1,6 +1,7 @@
 import { HSL, HSV, RGB8, RGBF, XYZ } from '../interfaces/color-models';
 import { FromRGBF } from './rgbf';
 import { HexHelper } from '../util/helpers';
+import { Lab } from '../index';
 
 /**
  * Converter from 8 bit RGB colour model representation into other supported colour models.
@@ -184,6 +185,24 @@ export class FromRGB8 {
   static toCssRgba(r: any, g: number, b?: number, a?: number): string {
     const args = FromRGB8.resolveRGBAArguments(r, g, b, a);
     return `rgba(${args.r}, ${args.g}, ${args.b}, ${(args.a / 255).toFixed(2)})`;
+  }
+
+  /**
+   * Converts RGB8 object to Lab.
+   * @param {RGB8} rgb
+   * @returns {Lab}
+   */
+  static toLab(rgb: RGBF): Lab;
+  /**
+   * Converts RGB8 values to Lab.
+   * @param {number} r
+   * @param {number} g
+   * @param {number} b
+   * @returns {Lab}
+   */
+  static toLab(r: number, g: number, b: number): Lab;
+  static toLab(r: any, g?: number, b?: number): Lab {
+    return FromRGBF.toLab(FromRGB8.toRGBF(FromRGB8.resolveArguments(r, g, b)));
   }
 
   private static resolveArguments(r: any, g?: number, b?: number): RGB8 {

@@ -25,6 +25,7 @@ Currently supported colour models:
   components do not directly represent any familiar physical properties of colour.
   I'll be honest here - I have no idea how it works. All three components are described
   by three float numbers starting at *0.0*. They don't have any defined upper limit.
+* **CIE-Lab** - D65 at 2 degrees illuminant is assumed, which corresponds to sRGB.
 
 It is also possible to convert `RGB8` to hexadecimal representation.
 
@@ -70,15 +71,18 @@ implemented in the future.
 export declare class FromRGBF {
     static toRGB8(rgb: RGBF): RGB8;
     static toRGB8(r: number, g: number, b: number): RGB8;
- 
+
     static toHSL(rgb: RGBF): HSL;
     static toHSL(r: number, g: number, b: number): HSL;
- 
+
     static toHSV(rgb: RGBF): HSV;
     static toHSV(r: number, g: number, b: number): HSV;
- 
+
     static toXYZ(rgb: RGBF): XYZ;
     static toXYZ(r: number, g: number, b: number): XYZ;
+
+    static toLab(rgb: RGBF): Lab;
+    static toLab(r: number, g: number, b: number): Lab;
 }
 ```
 
@@ -118,9 +122,12 @@ export declare class FromRGB8 {
 
     static toARGBHex(rgb: RGB8, alpha: number): string;
     static toARGBHex(r: number, g: number, b: number, a: number): string;
-    
+
     static toCssRgba(rgb: RGB8, alpha: number): string;
     static toCssRgba(r: number, g: number, b: number, alpha: number): string;
+
+    static toLab(rgb: RGBF): Lab;
+    static toLab(r: number, g: number, b: number): Lab;
 }
 ```
 
@@ -165,7 +172,7 @@ export declare class FromHSV {
 
 ### `FromXYZ`
 
-This class contains static methods to convert `XYZ` colours into `RGB8` and `RGBF`.
+This class contains static methods to convert `XYZ` colours into `RGB8`, `RGBF` and `Lab`.
 
 ```javascript
 export declare class FromXYZ {
@@ -174,6 +181,26 @@ export declare class FromXYZ {
 
     static toRGB8(xyz: XYZ): RGB8;
     static toRGB8(x: number, y: number, z: number): RGB8;
+
+    static toLab(xyz: XYZ): Lab;
+    static toLab(x: number, y: number, z: number): Lab;
+}
+```
+
+### `FromLab`
+
+This class contains static methods to convert `CIE-Lab` colours into `RGB8`, `RGBF` and `XYZ`.
+
+```javascript
+export declare class FromLab {
+    static toXYZ(lab: Lab): XYZ;
+    static toXYZ(l: number, a: number, b: number): XYZ;
+
+    static toRGBF(lab: Lab): RGBF;
+    static toRGBF(l: number, a: number, b: number): RGBF;
+
+    static toRGB8(lab: Lab): RGB8;
+    static toRGB8(l: number, a: number, b: number): RGB8;
 }
 ```
 
@@ -211,4 +238,22 @@ export interface XYZ {
     y: number;
     z: number;
 }
+
+export interface Lab {
+  l: number;
+  a: number;
+  b: number;
+}
 ```
+
+## References
+
+Following resources were used to write this library:
+
+* [EasyRGB](https://www.easyrgb.com/en/math.php)
+* [www.brucelindbloom.com](http://www.brucelindbloom.com/)
+* [ColorMine.org](http://colormine.org/)
+* [MathWorks](https://uk.mathworks.com/)
+* [RapidTables](https://www.rapidtables.com/)
+* [Wikipedia](https://en.wikipedia.org/)
+* [Gist from mjackson](https://gist.github.com/mjackson/5311256)

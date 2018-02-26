@@ -53,4 +53,16 @@ describe('FromRGBF', () => {
     expect(result.y).to.be.within(0.36813, 0.36814);
     expect(result.z).to.be.within(0.076305, 0.076306);
   });
+
+  it('should convert from RGBF to Lab', () => {
+    let result = FromRGBF.toLab(1, 1, 1);
+    expect(result.l).to.eq(100, 'Lab.L');
+    expect(result.a).to.eq(0, 'Lab.a');
+    expect(result.b).to.eq(0, 'Lab.b');
+
+    result = FromRGBF.toLab(1, 0, 0);
+    expect(result.l).to.be.within(53.2407, 53.2408, 'Lab.L');
+    expect(result.a).to.be.within(80.0924, 80.0925, 'Lab.a');
+    expect(result.b).to.be.within(67.2031, 67.2032, 'Lab.b');
+  });
 });

@@ -1,6 +1,8 @@
 import { HSL, HSV, RGB8, RGBF, XYZ } from '../interfaces/color-models';
 import { HueHelper, XYZHelper } from '../util/helpers';
 import { Matrix } from '../util/matrix';
+import { Lab } from '../index';
+import { FromXYZ } from './xyz';
 
 /**
  * Converter from float number RGB colour model representation into other supported colour models.
@@ -112,10 +114,28 @@ export class FromRGBF {
     const pb = XYZHelper.pivotRGB(args.b);
 
     return {
-      x: pr * Matrix.sRGBtoXYZ.r[0] + pg * Matrix.sRGBtoXYZ.r[1] + pb * Matrix.sRGBtoXYZ.r[2],
-      y: pr * Matrix.sRGBtoXYZ.g[0] + pg * Matrix.sRGBtoXYZ.g[1] + pb * Matrix.sRGBtoXYZ.g[2],
-      z: pr * Matrix.sRGBtoXYZ.b[0] + pg * Matrix.sRGBtoXYZ.b[1] + pb * Matrix.sRGBtoXYZ.b[2]
+      x: pr * Matrix.sRGBtoXYZ.r[ 0 ] + pg * Matrix.sRGBtoXYZ.r[ 1 ] + pb * Matrix.sRGBtoXYZ.r[ 2 ],
+      y: pr * Matrix.sRGBtoXYZ.g[ 0 ] + pg * Matrix.sRGBtoXYZ.g[ 1 ] + pb * Matrix.sRGBtoXYZ.g[ 2 ],
+      z: pr * Matrix.sRGBtoXYZ.b[ 0 ] + pg * Matrix.sRGBtoXYZ.b[ 1 ] + pb * Matrix.sRGBtoXYZ.b[ 2 ]
     };
+  }
+
+  /**
+   * Converts RGBF object to Lab.
+   * @param {RGBF} rgb
+   * @returns {Lab}
+   */
+  static toLab(rgb: RGBF): Lab;
+  /**
+   * Converts RGBF values to Lab.
+   * @param {number} r
+   * @param {number} g
+   * @param {number} b
+   * @returns {Lab}
+   */
+  static toLab(r: number, g: number, b: number): Lab;
+  static toLab(r: any, g?: number, b?: number): Lab {
+    return FromXYZ.toLab(FromRGBF.toXYZ(FromRGBF.resolveArguments(r, g, b)));
   }
 
   private static resolveArguments(r: any, g?: number, b?: number): RGBF {
