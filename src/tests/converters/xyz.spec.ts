@@ -1,8 +1,7 @@
 import { expect } from 'chai';
 import 'mocha';
 
-import { FromXYZ } from '../../main/converters/xyz';
-import { FromRGB8 } from '../../main';
+import { FromRGB8, FromXYZ } from '../../main';
 
 describe('FromXYZ', () => {
   it('should convert from XYZ to RGBF', () => {

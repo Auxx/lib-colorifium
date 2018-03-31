@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import 'mocha';
 
-import { FromLab } from '../../main/converters/lab';
+import { FromLab } from '../../main';
 
 describe('FromLab', () => {
   it('should convert from Lab to XYZ', () => {

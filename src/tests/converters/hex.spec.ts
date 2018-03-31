@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import 'mocha';
 
-import { FromHex } from '../../main/converters/hex';
+import { FromHex } from '../../main';
 
 describe('FromHex', () => {
   it('should convert from hex to RGB8', () => {

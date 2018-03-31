@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import 'mocha';
 
-import { FromHSV } from '../../main/converters/hsv';
+import { FromHSV } from '../../main';
 
 describe('FromHSV', () => {
   it('should convert from HSV to RGBF', () => {

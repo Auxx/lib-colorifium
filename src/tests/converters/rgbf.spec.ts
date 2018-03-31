@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import 'mocha';
 
-import { FromRGBF } from '../../main/converters/rgbf';
+import { FromRGBF } from '../../main';
 
 describe('FromRGBF', () => {
   it('should convert from RGB float values to RGB8', () => {
