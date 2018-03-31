@@ -6,21 +6,23 @@ export class HueHelper {
     const max = Math.max(rgb.r, rgb.g, rgb.b);
     const delta = max - min;
 
-    let hue;
+    let hue = 0;
 
-    switch (max) {
-      case 0:
-        hue = 0;
-        break;
-      case rgb.r:
-        hue = (rgb.g - rgb.b) / delta + (rgb.g < rgb.b ? 6 : 0);
-        break;
-      case rgb.g:
-        hue = (rgb.b - rgb.r) / delta + 2;
-        break;
-      case rgb.b:
-        hue = (rgb.r - rgb.g) / delta + 4;
-        break;
+    if (delta !== 0) {
+      switch (max) {
+        case 0:
+          hue = 0;
+          break;
+        case rgb.r:
+          hue = (rgb.g - rgb.b) / delta + (rgb.g < rgb.b ? 6 : 0);
+          break;
+        case rgb.g:
+          hue = (rgb.b - rgb.r) / delta + 2;
+          break;
+        case rgb.b:
+          hue = (rgb.r - rgb.g) / delta + 4;
+          break;
+      }
     }
 
     return {
